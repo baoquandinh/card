@@ -44,22 +44,20 @@ class Deck {
         this.cards.splice(shufflePoint, )
     }
 
-    overhandShuffle(repeat) {
+    overhandShuffle() {
         let tempDeck = this.cards.splice(this.cards.length / 2)
         let secondSplit = tempDeck.splice(tempDeck.length / 2)
 
-        while (repeat) {
-            //Add it back
-            secondSplit.forEach(card => {
-                this.cards.unshift(card)
-            })
-            tempDeck.forEach(card => {
-                this.cards.push(card)
-            })
-            tempDeck = this.cards.splice(this.cards.length / 2)
-            secondSplit = tempDeck.splice(tempDeck.length / 2)
-            repeat--;
-        }
+        //Add it back
+        secondSplit.forEach(card => {
+            this.cards.unshift(card)
+        })
+        tempDeck.forEach(card => {
+            this.cards.push(card)
+        })
+        
+        // tempDeck = this.cards.splice(this.cards.length / 2)
+        // secondSplit = tempDeck.splice(tempDeck.length / 2)
     }
 
     deal() {
@@ -82,5 +80,5 @@ class Card {
 
 deck = new Deck();
 // deck.shuffle(); 
-deck.overhandShuffle(2);
+deck.overhandShuffle();
 deck.print();
