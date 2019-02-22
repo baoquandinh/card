@@ -4,6 +4,8 @@ class Deck {
         this.cards = []
         this.ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
         this.suits = ["Hearts", "Spades", "Clubs", "Diamonds"]
+        this.timestamp = new Date()
+        this.timestamp = this.timestamp.getHours() + this.timestamp.getMinutes() + this.timestamp.getSeconds() + this.timestamp.getMilliseconds()
         this.build()
     }
 
@@ -36,28 +38,21 @@ class Deck {
         return this.cards
     }
 
-    shuffle() {
+    shuffle(repeat) {
         // Randomizes which part of the deck to shuffle
-        let shuffleSize = this.cards.length
-        let tempDeck = Math.floor(Math.random() * shuffleSize)
-        console.log(shufflePoint)
-        this.cards.splice(shufflePoint, )
-    }
-
-    overhandShuffle() {
-        let tempDeck = this.cards.splice(this.cards.length / 2)
-        let secondSplit = tempDeck.splice(tempDeck.length / 2)
-
-        //Add it back
-        secondSplit.forEach(card => {
-            this.cards.unshift(card)
-        })
-        tempDeck.forEach(card => {
-            this.cards.push(card)
-        })
-        
-        // tempDeck = this.cards.splice(this.cards.length / 2)
-        // secondSplit = tempDeck.splice(tempDeck.length / 2)
+        let max = this.cards.length
+        let delta = new Date()
+        delta = delta.getHours() + delta.getMinutes() + delta.getSeconds() + delta.getMilliseconds() + this.timestamp
+        repeat = repeat * delta
+        while (repeat) {
+            let shufflePoint = Math.floor(Math.random() * max)
+            let tempDeck = this.cards.splice(shufflePoint)
+            tempDeck.forEach(card => {
+                this.cards.unshift(card)
+            })
+            repeat--;
+        }
+        console.log(this.cards)
     }
 
     deal() {
@@ -79,6 +74,6 @@ class Card {
 
 
 deck = new Deck();
-// deck.shuffle(); 
-deck.overhandShuffle();
-deck.print();
+deck.shuffle(600);
+// deck.overhandShuffle();
+// deck.print();
